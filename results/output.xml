@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2025-09-28T02:24:08.306895" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="D:\github\hello-world-java-docker\tests">
+<suite id="s1-s1" name="Api" source="D:\github\hello-world-java-docker\tests\api">
+<suite id="s1-s1-s1" name="Test Api" source="D:\github\hello-world-java-docker\tests\api\test_api.robot">
+<test id="s1-s1-s1-t1" name="Validate Root Endpoint" line="12">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-28T02:24:08.660243" level="INFO">Creating Session using : alias=hello, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>hello</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-28T02:24:08.659930" elapsed="0.000642"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-28T02:24:08.693770" level="INFO">GET Request : url=http://localhost:8080/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-28T02:24:08.693963" level="INFO">GET Response : url=http://localhost:8080/ 
+ status=200, reason= 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Sat, 27 Sep 2025 20:54:08 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
+ body={"success":true,"new-message":"A sample java application deployed with REST API, Maven and docker","hello":"world"} 
+ </msg>
+<msg time="2025-09-28T02:24:08.694172" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>hello</arg>
+<arg>/</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.661203" elapsed="0.033011"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-28T02:24:08.695545" level="INFO">Response Status: 200</msg>
+<arg>Response Status: ${response.status_code}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.694731" elapsed="0.000959"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-09-28T02:24:08.696553" level="INFO">Response Content: {"success":true,"new-message":"A sample java application deployed with REST API, Maven and docker","hello":"world"}</msg>
+<arg>Response Content: ${response.content}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.696035" elapsed="0.000882"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-09-28T02:24:08.697684" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.697293" elapsed="0.000448"/>
+</kw>
+<kw name="Convert String To Json" owner="JSONLibrary">
+<msg time="2025-09-28T02:24:08.698629" level="INFO">${json} = {'success': True, 'new-message': 'A sample java application deployed with REST API, Maven and docker', 'hello': 'world'}</msg>
+<var>${json}</var>
+<arg>${response.content}</arg>
+<doc>Convert String to JSON object</doc>
+<status status="PASS" start="2025-09-28T02:24:08.698148" elapsed="0.000512"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${json}[success]</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.698872" elapsed="0.000150"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${json}[hello]</arg>
+<arg>world</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.699404" elapsed="0.000201"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${json}[new-message]</arg>
+<arg>A sample java application deployed with REST API, Maven and docker</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.700074" elapsed="0.000421"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json}</arg>
+<arg>success</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.701490" elapsed="0.000267"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json}</arg>
+<arg>hello</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.701954" elapsed="0.000151"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json}</arg>
+<arg>new-message</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.702363" elapsed="0.000154"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${json}[success]</arg>
+<arg>${True}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.702802" elapsed="0.000272"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary" type="TEARDOWN">
+<msg time="2025-09-28T02:24:08.703690" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2025-09-28T02:24:08.703584" elapsed="0.000214"/>
+</kw>
+<doc>Test the root endpoint returns expected JSON response</doc>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="PASS" start="2025-09-28T02:24:08.658126" elapsed="0.045834"/>
+</test>
+<test id="s1-s1-s1-t2" name="Health Check Endpoint Test" line="47">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-28T02:24:08.705380" level="INFO">Creating Session using : alias=app, url=http://localhost:8080, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>app</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-28T02:24:08.705208" elapsed="0.000343"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-28T02:24:08.717919" level="INFO">GET Request : url=http://localhost:8080/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-28T02:24:08.718029" level="INFO">GET Response : url=http://localhost:8080/ 
+ status=200, reason= 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Sat, 27 Sep 2025 20:54:08 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
+ body={"success":true,"new-message":"A sample java application deployed with REST API, Maven and docker","hello":"world"} 
+ </msg>
+<msg time="2025-09-28T02:24:08.718183" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/</arg>
+<arg>expected_status=200</arg>
+<arg>timeout=10</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.705822" elapsed="0.012388"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-09-28T02:24:08.719467" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.718941" elapsed="0.000598"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-09-28T02:24:08.720437" level="INFO">Length is 115.</msg>
+<arg>${response.content}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-09-28T02:24:08.720021" elapsed="0.000466"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary" type="TEARDOWN">
+<msg time="2025-09-28T02:24:08.721587" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2025-09-28T02:24:08.721473" elapsed="0.000196"/>
+</kw>
+<doc>Verify the application is running and responsive</doc>
+<tag>health</tag>
+<tag>smoke</tag>
+<status status="PASS" start="2025-09-28T02:24:08.704631" elapsed="0.017374"/>
+</test>
+<status status="PASS" start="2025-09-28T02:24:08.364828" elapsed="0.358928"/>
+</suite>
+<status status="PASS" start="2025-09-28T02:24:08.362215" elapsed="0.363121"/>
+</suite>
+<suite id="s1-s2" name="Ui" source="D:\github\hello-world-java-docker\tests\ui">
+<suite id="s1-s2-s1" name="Test Ui" source="D:\github\hello-world-java-docker\tests\ui\test_ui.robot">
+<test id="s1-s2-s1-t1" name="Homepage Should Display JSON Keys" line="10">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-09-28T02:24:09.096223" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:8080'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-09-28T02:24:09.095926" elapsed="2.441746"/>
+</kw>
+<kw name="Set Browser Implicit Wait" owner="SeleniumLibrary">
+<arg>${TIMEOUT}</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-09-28T02:24:11.538546" elapsed="0.003029"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-09-28T02:24:11.590310" level="INFO">Current page contains text 'success'.</msg>
+<arg>success</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-09-28T02:24:11.543103" elapsed="0.047568"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-09-28T02:24:11.627413" level="INFO">Current page contains text 'hello'.</msg>
+<arg>hello</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-09-28T02:24:11.591427" elapsed="0.036166"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-09-28T02:24:11.657689" level="INFO">Current page contains text 'world'.</msg>
+<arg>world</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-09-28T02:24:11.628268" elapsed="0.029707"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-09-28T02:24:11.685872" level="INFO">Current page contains text 'new-message'.</msg>
+<arg>new-message</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-09-28T02:24:11.658710" elapsed="0.027493"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-09-28T02:24:11.707439" level="INFO">Current page contains text 'A sample java application deployed with REST API, Maven and docker'.</msg>
+<arg>A sample java application deployed with REST API, Maven and docker</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-09-28T02:24:11.686941" elapsed="0.020738"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-09-28T02:24:11.747573" level="INFO">Current page contains text '"success":true'.</msg>
+<arg>"success":true</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-09-28T02:24:11.708394" elapsed="0.039421"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-09-28T02:24:11.770893" level="INFO">Current page contains text '"hello":"world"'.</msg>
+<arg>"hello":"world"</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-09-28T02:24:11.748617" elapsed="0.022603"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-09-28T02:24:11.772876" elapsed="2.219416"/>
+</kw>
+<doc>Verify the homepage displays the expected JSON response</doc>
+<tag>smoke</tag>
+<tag>ui</tag>
+<status status="PASS" start="2025-09-28T02:24:09.094891" elapsed="4.898240"/>
+</test>
+<test id="s1-s2-s1-t2" name="Homepage JSON Structure Test" line="33">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-09-28T02:24:13.996032" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:8080'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-09-28T02:24:13.995491" elapsed="2.496209"/>
+</kw>
+<kw name="Set Browser Implicit Wait" owner="SeleniumLibrary">
+<arg>${TIMEOUT}</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-09-28T02:24:16.493731" elapsed="0.003596"/>
+</kw>
+<kw name="Get Source" owner="SeleniumLibrary">
+<msg time="2025-09-28T02:24:16.508439" level="INFO">${page_source} = &lt;html&gt;&lt;head&gt;&lt;meta name="color-scheme" content="light dark"&gt;&lt;meta charset="utf-8"&gt;&lt;/head&gt;&lt;body&gt;&lt;pre&gt;{"success":true,"new-message":"A sample java application deployed with REST API, Maven and docker","h...</msg>
+<var>${page_source}</var>
+<doc>Returns the entire HTML source of the current page or frame.</doc>
+<status status="PASS" start="2025-09-28T02:24:16.497997" elapsed="0.010574"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${page_source}</arg>
+<arg>{"success":true</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-09-28T02:24:16.510912" elapsed="0.000509"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${page_source}</arg>
+<arg>"hello":"world"</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-09-28T02:24:16.511980" elapsed="0.000420"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${page_source}</arg>
+<arg>"new-message":"A sample java application deployed with REST API, Maven and docker"</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-09-28T02:24:16.513055" elapsed="0.000410"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-09-28T02:24:16.514199" elapsed="2.238616"/>
+</kw>
+<doc>Test that the homepage returns proper JSON structure</doc>
+<tag>json</tag>
+<tag>ui</tag>
+<status status="PASS" start="2025-09-28T02:24:13.994468" elapsed="4.759093"/>
+</test>
+<status status="PASS" start="2025-09-28T02:24:08.729996" elapsed="10.025095"/>
+</suite>
+<status status="PASS" start="2025-09-28T02:24:08.727111" elapsed="10.029714"/>
+</suite>
+<status status="PASS" start="2025-09-28T02:24:08.309696" elapsed="10.448485"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">api</stat>
+<stat pass="1" fail="0" skip="0">health</stat>
+<stat pass="1" fail="0" skip="0">json</stat>
+<stat pass="3" fail="0" skip="0">smoke</stat>
+<stat pass="2" fail="0" skip="0">ui</stat>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="4" fail="0" skip="0">Tests</stat>
+<stat name="Api" id="s1-s1" pass="2" fail="0" skip="0">Tests.Api</stat>
+<stat name="Test Api" id="s1-s1-s1" pass="2" fail="0" skip="0">Tests.Api.Test Api</stat>
+<stat name="Ui" id="s1-s2" pass="2" fail="0" skip="0">Tests.Ui</stat>
+<stat name="Test Ui" id="s1-s2-s1" pass="2" fail="0" skip="0">Tests.Ui.Test Ui</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
