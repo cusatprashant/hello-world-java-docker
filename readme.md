@@ -33,3 +33,14 @@ http://localhost:8080/
 ```
 https://edwin.baculsoft.com/2020/07/building-containerized-images-on-openshift-4-and-push-the-result-to-third-party-image-registry/
 ```
+## Learning and Acheivement
+```
+This is my first full stack development POC with utilizing AI and LLM.
+Below is the configuration steps in details:
+
+- Anthropic's Claude desktop LLM (free version, but interested in buying enterprise version)
+- Integrated Filesystem MCP server
+- Used Claude Prompt for various source file updates and improved robot test coverage.
+
+Note: This setup is capable of creating a complete project from scratch.
+```
