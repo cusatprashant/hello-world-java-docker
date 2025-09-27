@@ -6,7 +6,7 @@ a very simple rest-api-hello-world java application with Spring Boot and Maven, 
 ```
 Run mvn clean install
 
-Note : It will compile and run unit/surefire tests
+Note : It will compile, run unit/surefire tests and creates jar file
 ``` 
 ## How to Build
 ```
@@ -22,8 +22,8 @@ docker run -d -p 8080:8080 hello-world-java-docker
 Activate python venv : .\venv\Scripts\activate
 Run pip install -r requirements.txt
 
-robot robot/api
-robot robot/ui
+Run cd tests
+Run robot -d results api/api_tests.robot ui/ui_tests.robot
 ```
 ## Verify your application
 ```
